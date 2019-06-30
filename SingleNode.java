@@ -1,3 +1,5 @@
+package travel.struct;
+
 public class SingleNode {
 
     /** 头节点指针 */
@@ -7,7 +9,7 @@ public class SingleNode {
     private Node tail;
 
     /** 链表的长度 */
-    private int size;
+    public int size;
 
 
     public void insert(int data, int index) throws Exception {
@@ -35,8 +37,34 @@ public class SingleNode {
         size ++;
     }
 
-    
-    
+    public Node remove(int index) throws Exception {
+        if (index < 0 || index >= size) {
+            throw new Exception("超出链表节点范围");
+        }
+
+        Node removeNode = null;
+
+        if (index == 0) {
+            removeNode = head;
+            head = head.next;
+        } else if (index == size - 1) {
+            Node preNode = get(index - 1);
+            removeNode = tail;
+            preNode.next = null;
+            tail = preNode;
+        } else {
+            Node preNode = get(index - 1);
+            Node nextNode = preNode.next.next;
+            removeNode = preNode.next;
+            preNode.next = nextNode;
+        }
+
+        size --;
+        return removeNode;
+    }
+
+
+
     public Node get(int index) throws Exception{
         if (index < 0 || index > size) {
             throw new Exception("超出链表节点范围");
@@ -50,6 +78,14 @@ public class SingleNode {
         return temp;
     }
 
+    public void output() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.println(temp.value);
+            temp = temp.next;
+        }
+    }
+
     private static class Node {
         int value;
         Node next;
@@ -58,7 +94,29 @@ public class SingleNode {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
+        SingleNode singleNode = new SingleNode();
+//        System.out.println(singleNode.get(0));
+//        System.out.println(singleNode.size);
 
+        singleNode.insert(3, 0);
+        singleNode.insert(7, 1);
+        singleNode.insert(9, 2);
+        singleNode.insert(5, 3);
+        singleNode.insert(6, 1);
+        System.out.println("after insert size ===========" + singleNode.size);
+        System.out.println("===========");
+        singleNode.remove(4);
+        singleNode.remove(0);
+        singleNode.output();
+        System.out.println("===========");
+        System.out.println("after remove size ===========" + singleNode.size);
+//        System.out.println(singleNode.get(0).value);
+   
+//        singleNode.insert(9, 1);
+//        singleNode.remove(0);
+
+
+//        singleNode.remove(0);
     }
 }
