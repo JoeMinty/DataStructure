@@ -43,7 +43,7 @@ public class StackAndQueue {
                 return 1;
             } else {
                 System.out.println("Move 1 from " + from + " to " + mid);
-                System.out.println("Move 1 from " + from + " to " + to);
+                System.out.println("Move 1 from " + mid + " to " + to);
                 return 2;
             }
         }
