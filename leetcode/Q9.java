@@ -17,6 +17,24 @@ public class Q9 {
         return true;
     }
 
+    public boolean isPalindrome1(int x) {
+        if (x < 0) {
+            return false;
+        }
+
+        if (x % 10 == 0 && x != 0) {
+            return false;
+        }
+
+        int revertedNum = 0;
+        while (x > revertedNum) {
+            revertedNum = revertedNum * 10 + x % 10;
+            x /= 10;
+        }
+
+        return x == revertedNum || x == revertedNum / 10;
+    }
+
     public static void main(String[] args) {
         boolean res = new Q9().isPalindrome(123321);
         System.out.println(res);
